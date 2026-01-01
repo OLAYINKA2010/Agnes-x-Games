@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout - Agnes X Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>Confirm Logout</h1>
+            <p>Please enter your username and password to logout.</p>
+
+            <form id="logoutForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="logoutUsername" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="logoutPassword" required>
+                </div>
+
+                <button class="auth-btn" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("logoutForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const username = document.getElementById("logoutUsername").value.trim();
+    const password = document.getElementById("logoutPassword").value.trim();
+
+    const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!loggedIn) {
+        alert("No user is logged in.");
+        return;
+    }
+
+    if (loggedIn.username === username && loggedIn.password === password) {
+        localStorage.removeItem("loggedInUser");
+        alert("Logout Successful!");
+        window.location.href = "dashboard.html"; 
+    } else {
+        alert("Incorrect username or password.");
+    }
+});
+
+    </script>
+    <script src="js/nav.js"></script>
+</body>
+</html>

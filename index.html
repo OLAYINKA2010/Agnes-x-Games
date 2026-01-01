@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+    <h2>Welcome Player!</h2>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+        if (!user) {
+            window.location.href = "login.html";
+        } else {
+            document.body.insertAdjacentHTML("beforeend",
+                `<p>You are logged in as <strong>${user.username}</strong></p>`
+            );
+        }
+    </script>
+    <button class="bg-secondary"><a href="dashboard.html" class="bg-secondary">ENTER</a></button>
+</body>
+</html>

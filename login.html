@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Agnes X Games</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-brain"></i>
+                    <span>Agnes X Games</span>
+                </div>
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Sign in to continue your brain training</p>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" name="email" required 
+                           placeholder="your.email@gmail.com">
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required 
+                           placeholder="Enter your password">
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn" id="loginBtn">
+                    <span id="btnText">Sign In</span>
+                    <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
+                </button>
+            </form>
+
+            <div class="auth-divider">
+                <span>Or continue with</span>
+            </div>
+
+            <button class="gmail-btn" onclick="signInWithGmail()">
+                <i class="fab fa-google"></i>
+                Sign in with Gmail
+            </button>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="signup.html" class="auth-link">Sign Up</a></p>
+                <p class="auth-note">
+                    <i class="fas fa-info-circle"></i>
+                    Use Gmail to save progress across devices
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // js/login.js
+
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (!user) {
+        alert("Incorrect email or password!");
+        return;
+    }
+
+    // Save logged-in user
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+    alert("Login Successful!");
+    window.location.href = "dashboard.html"; // go to game area
+});
+
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
